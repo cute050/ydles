@@ -4,10 +4,10 @@ spring:
   application:
     name: goods
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ydles_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: local
-    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.200.128:3306/ydles_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
 eureka:
   client:
     service-url:
@@ -28,3 +28,8 @@ hystrix:
           enabled: true
         isolation:
           strategy: SEMAPHORE
+
+mybatis:
+  # spring boot集成mybatis的方式打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
