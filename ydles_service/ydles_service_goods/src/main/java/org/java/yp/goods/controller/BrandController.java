@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 杨鹏
@@ -50,5 +51,24 @@ public class BrandController {
     public Result delete(@PathVariable("id") Integer id){
         brandService.delete(id);
         return new Result(true, StatusCode.OK,"删除成功");
+    }
+
+
+    @GetMapping("/search")
+    public Result search(@RequestParam Map<String, String> searchMap){
+        List<Brand> brandList = brandService.search(searchMap);
+        return new Result(true, StatusCode.OK,"查询成功",brandList);
+    }
+
+    @GetMapping("/search/{page}/{size}")
+    public Result findPage(@PathVariable("page") int page, @PathVariable("size") int size){
+        List<Brand> brandList = brandService.findPage(page, size);
+        return new Result(true, StatusCode.OK,"查询成功",brandList);
+    }
+
+    @GetMapping("/searchPage/{page}/{size}")
+    public Result searchPage(@RequestParam Map<String, String> searchMap,@PathVariable int page, @PathVariable int size){
+        List<Brand> brandList = brandService.findPage(page,size,searchMap);
+        return new Result(true,StatusCode.OK,"查询成功",brandList);
     }
 }
